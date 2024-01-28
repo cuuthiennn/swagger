@@ -894,3 +894,33 @@ paths:
                 status: 200
                 message: "Success"
                 payload: []
+    delete:
+      tags:
+        - AccountPostComment
+      parameters:
+        - in: cookie
+          name: token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountPostCommentId:
+                  type: string
+                content:
+                  type: string
+      responses:
+        404:
+          description: Không tìm thấy comment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                statusCode: 404
+                message: "fail"
+                payload: "This Account Post Comment with Id::Not Found, Please Try Again."
