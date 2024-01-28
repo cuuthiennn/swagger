@@ -894,6 +894,17 @@ paths:
                 status: 200
                 message: "Success"
                 payload: []
+        404:
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                statusCode: 404
+                message: "fail"
+                payload: "Recheck Again, Not Found Account Post Comment with PostId::"
+
     delete:
       tags:
         - AccountPostComment
@@ -924,3 +935,55 @@ paths:
                 statusCode: 404
                 message: "fail"
                 payload: "This Account Post Comment with Id::Not Found, Please Try Again."
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                statusCode: 200
+                message: "Success"
+                payload: []
+  /api/v1/account-posts-reaction/reaction:
+    post:
+      tags:
+        - AccountPostReaction
+      description: Thêm post từ người dùng vào bảng account_post_reaction
+      parameters:
+        - in: cookie
+          name: token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idPost:
+                  type: string
+                isVote:
+                  type: string
+      responses:
+        404:
+          description: Request body property null
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                statusCode: 404
+                message: "fail"
+                payload: "The idPost In Body Request Must Not Null!!!"
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                statusCode: 200
+                message: "fail"
+                payload: []
