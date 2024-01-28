@@ -1,0 +1,22 @@
+components:
+  schemas:
+    AccountPostReaction:
+      type: object
+      properties:
+        idCreator:
+          type: String
+        description: Id của Account đã reaction
+        idPost:
+          type: String
+          description: Id của bài post được reaction
+        isUpvote:
+          type: Boolean
+          description: True sẽ là up vote flase sẽ là down vote
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo của reaction là date được chuyển thành BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật của reaction là date được chuyển thành BigInteger
+        creator:
+          $ref: './Account.yml#/components/schemas/Account'

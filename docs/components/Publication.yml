@@ -1,0 +1,31 @@
+components:
+  schemas:
+    Publication:
+      type: object
+      properties:
+        id:
+          type: String
+          description: Id của publication
+        background:
+          type: String
+          description: Background url của publication
+        logo:
+          type: String
+          description: Logo url của publication
+        name:
+          type: String
+          description: Tên của publication
+        bio:
+          type: String
+          description: Url bio của publication
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo - date được chuyển thành BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật - date được chuyển thành BigInteger
+        accountPublications:
+          description: Những account thuộc publication
+          type: Array
+          items:
+            $ref: './AccountPublication.yml#/components/schemas/AccountPublication'

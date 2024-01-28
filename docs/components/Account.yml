@@ -1,0 +1,58 @@
+components:
+  schemas:
+    Notification:
+      $ref: 'components/Notification.yml#/components/schemas/Notification'
+    Account:
+      type: object
+      properties:
+        id:
+          type: String
+          description: Id của Account được lấy từ firebase token
+        nickname:
+          type: String
+          description: Nick name của Account được lấy từ firebase token
+        authId:
+          type: String
+          description: AuthId của Account được lấy từ firebase token
+        avatarUrl:
+          type: String
+          description: Avatar url của Account được lấy từ firebase token
+        backgroundUrl:
+          type: String
+          description: Back ground url của Account được lấy từ firebase token
+        clientToken:
+          type: String
+          description: Client token của Account - sử dụng để bắn FCM(FireBase Cloud Message)
+        isActive:
+          type: Boolean
+          description: Trường xác định Account đã được kích hoạt premium hay chưa
+        publicIdAvatarUrlCloudinary:
+          type: String
+          description: Url avatar của Account trên Cloudinary
+        publicIdBackgroundUrlCloudinary:
+          type: String
+          description: Url back ground của Account trên Cloudinary
+        dateLatestUpdate:
+          type: Integer
+          description: Ngày cập nhật gần đây nhất của Account được chuyển từ date sang BigInteger
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo của Account được chuyển từ date sang BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật mới nhất của Account được chuyển từ date sang BigInteger
+        posts:
+          type: Array
+          items:
+            $ref:
+          description: những bài post của Account
+        accountPostReactions:
+          type: Array
+          items:
+            $ref:
+          description: những reaction của Account với các bài post
+        notifications:
+          type: Array
+          items:
+            $ref: '#/components/schemas/Notification'
+          description: những thông báo của Account

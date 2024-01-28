@@ -1,0 +1,66 @@
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: String
+          description: Id của bài post
+        idCreator:
+          type: String
+          description: Id của account tạo bài post
+        backgroundUrl:
+          type: String
+          description: Url của background được lưu trên Cloud
+        htmlString:
+          type: String
+          description: Html của bài post
+        description:
+          type: String
+          description: Mô tả của bài post
+        title:
+          type: String
+          description: Tiêu đề của bài post
+        topics:
+          type: String
+          description: Những chủ đề của liên quan đến bài post
+        blocks:
+          type: String
+          description: Block của bài viết
+        publishDate:
+          type: Integer
+          description: Ngày được phê duyệt để public bài post - date được chuyển thành BigInteger
+        isPublic:
+          type: Boolean
+          description: True là được public và ngược lại
+        isPaid:
+          type: Boolean
+          description: True là cần account premium để đọc và ngươc lại
+        isActive:
+          type: Boolean
+          description: True là đã được phê duyệt và ngược lại
+        upvote:
+          type: Integer
+          description: Số lượng up vote của bài post
+        downvote:
+          type: Integer
+          description: Số lượng down vote của bài post
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo - date được chuyển thành BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật - date được chuyển thành BigInteger
+        accountPostComments:
+          description: Những comment của bài post
+          type: Array
+          items:
+            $ref: "./AccountPostComment.yml#/components/schemas/AccountPostComment"
+        accountPostReactions:
+          description: Những reaction của bài post
+          type: Array
+          items:
+            $ref: "./AccountPostReaction.yml#/components/schemas/AccountPostReaction"
+        creator:
+          $ref: "./Account.yml#/components/schemas/Account"
+          description: Người tạo bài post

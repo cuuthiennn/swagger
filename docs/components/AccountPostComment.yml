@@ -1,0 +1,37 @@
+components:
+  schemas:
+    AccountPostComment:
+      type: object
+      properties:
+        id:
+          type: String
+          description: Id của AccountPostComment
+        idCreator:
+          type: String
+          description: Id của Account tạo ra comment
+        idPost:
+          type: String
+          description: Id của bài post
+        idParentComment:
+          type: String
+          description: Id của comment được reply
+        content:
+          type: String
+          description: Nội dung của comment
+        isDelete:
+          type: Boolean
+          description: Trường xác định comment đã được xoá hay chưa
+        commentLeft:
+          type: Integer
+          description: Số thứ tự left của comment
+        commentRight:
+          type: Integer
+          description: Số thứ tự right của comment
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo của comment được chuyển từ date sang BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật của comment được chuyển từ date sang BigInteger
+        creator:
+          $ref: './Account.yml#/components/schemas/Account'

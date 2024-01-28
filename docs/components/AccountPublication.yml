@@ -1,0 +1,29 @@
+components:
+  schemas:
+    AccountPublication:
+      type: object
+      properties:
+        id:
+          type: String
+          description: Id của AccountPublication
+        idAccount:
+          type: String
+          description: Id của Account
+        idPublication:
+          type: String
+          description: Id của Publication
+        isPend:
+          type: Boolean
+          description:
+        isBlock:
+          type: Boolean
+          description: True là Account đã bị block khỏi Publication và ngược lại
+        isAdmin:
+          type: Boolean
+          description: True là admin của Publication và ngược lại
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo - date được chuyển thành BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật - date được chuyển thành BigInteger

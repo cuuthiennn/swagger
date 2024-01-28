@@ -1,0 +1,896 @@
+openapi: 3.0.0
+info:
+  title: ENLIGHTEN
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+components:
+  schemas:
+    Account:
+      $ref: 'components/Account.yml#/components/schemas/Account'
+    AccountPostComment:
+      $ref: 'components/AccountPostComment.yml#/components/schemas/AccountPostComment'
+    AccountPostReaction:
+      $ref: 'components/AccountPostReaction.yml#/components/schemas/AccountPostReaction'
+    AccountPublication:
+      $ref: 'components/AccountPublication.yml#/components/schemas/AccountPublication'
+    AccountPublicationPost:
+      $ref: 'components/AccountPublicationPost.yml#/components/schemas/AccountPublicationPost'
+    Notification:
+      $ref: 'components/Notification.yml#/components/schemas/Notification'
+    Post:
+      $ref: 'components/Post.yml#/components/schemas/Post'
+    Publication:
+      $ref: 'components/Publication.yml#/components/schemas/Publication'
+    Result:
+      $ref: 'components/Result.yml#/components/schemas/Result'
+tags:
+  - name: Account
+  - name: AccountPostComment
+  - name: AccountPostReaction
+  - name: AccountPublication
+  - name: AccountPublicationPost
+  - name: Notification
+  - name: Post
+  - name: Publication
+
+paths:
+  /public/api/v1/posts/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id bài post cần tìm
+          schema:
+            title: id
+            type: string
+        - in: cookie
+          name: token
+          required: false
+          schema:
+            type: string
+      tags:
+        - Post
+      summary: get bài viết theo id
+      responses:
+        404:
+          description: không tìm thấy bài post/bài post chưa được duyệt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 404
+                message: "fail"
+                payload: "This Post with Post Id:${id}:Not Found, Please Try Again."
+        401:
+          description: Cần đăng nhập để đọc bài viết
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 401
+                message: "fail"
+                payload: "This Post is Activate Paid Mode, Please Login Your Account."
+        403:
+          description: Cần nâng cấp tài khoản để đọc
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 401
+                message: "fail"
+                payload: "This Post is Activate Paid Mode, Please Active Your Account To Premium."
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 200
+                message: "Success"
+                payload: [
+
+                  "id": "5b96d40c-8a24-43a2-acbc-67ef7c7e9a0c",
+                  "idCreator": "34c5314a-917d-488a-9580-6ab2651c8d74",
+                  "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705222279/ngssomvlhvxizbkdeu7b.png",
+                  "htmlString": "string",
+                  "description": "loremmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+                  "title": "<b>Tieu de bai viet nayayyyyyyyyyyyyyyyyy&nbsp;</b>",
+                  "topics": "NextJS,FrontEnd ,BackEnd,FullStack,ReactJS",
+                  "blocks": "{\"time\":1705222210997,\"blocks\":[{\"id\":\"sfRi9xIzKv\",\"type\":\"header\",\"data\":{\"text\":\"<b>Tieu de bai viet&nbsp;</b>\",\"level\":1}}],\"version\":\"2.28.2\"}",
+                  "publishDate": 1705222617574,
+                  "isPublic": false,
+                  "isPaid": false,
+                  "isActive": true,
+                  "upvote": 0,
+                  "downvote": 0,
+                  "dateCreate": 1705222369911,
+                  "dateUpdate": 1705222617575,
+                  "accountPostComments": [
+                    {
+                      "id": "31124888-7f51-4e52-a2d3-8d598ff21934",
+                      "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                      "idPost": "5b96d40c-8a24-43a2-acbc-67ef7c7e9a0c",
+                      "idParentComment": null,
+                      "content": "Bai",
+                      "dateCreate": 1705324004960,
+                      "dateUpdate": 1705324004960,
+                      "creator": {
+                        "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "nickname": "Nguyen Minh Tri",
+                        "authId": "nguyenminhtri1808t@gmail.com",
+                        "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                        "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                        "isAdmin": true,
+                        "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                        "isActive": false,
+                        "publicIdAvatarUrlCloudinary": null,
+                        "publicIdBackgroundUrlCloudinary": null,
+                        "dateLatestUpdate": null,
+                        "dateCreate": 1704967493369,
+                        "dateUpdate": 1705376464560
+                      }
+                    },
+                    {
+                      "id": "3b274b8c-0d1b-47fd-94a4-0fbe6af2bf08",
+                      "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                      "idPost": "5b96d40c-8a24-43a2-acbc-67ef7c7e9a0c",
+                      "idParentComment": null,
+                      "content": "asdfasdf",
+                      "dateCreate": 1705324010502,
+                      "dateUpdate": 1705324010502,
+                      "creator": {
+                        "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "nickname": "Nguyen Minh Tri",
+                        "authId": "nguyenminhtri1808t@gmail.com",
+                        "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                        "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                        "isAdmin": true,
+                        "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                        "isActive": false,
+                        "publicIdAvatarUrlCloudinary": null,
+                        "publicIdBackgroundUrlCloudinary": null,
+                        "dateLatestUpdate": null,
+                        "dateCreate": 1704967493369,
+                        "dateUpdate": 1705376464560
+                      }
+                    }
+                  ],
+                  "accountPostReactions": [],
+                  "creator": {
+                    "id": "34c5314a-917d-488a-9580-6ab2651c8d74",
+                    "nickname": "Ha Huy Tri (FPL HCM_K17)",
+                    "authId": "trihhps24849@fpt.edu.vn",
+                    "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocI7zEj79PuhUcV4T9sx5gNyMmsOlIEeW2WoTpXTzcoc=s96-c",
+                    "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocI7zEj79PuhUcV4T9sx5gNyMmsOlIEeW2WoTpXTzcoc=s96-c",
+                    "isAdmin": false,
+                    "clientToken": "cBJgKkFaQxaDG2sRTDrwU1:APA91bEFLvYo_j1Nnz-feL8lEDOCWJxHRUM7Y2DIHXEKqrbUS1Hzjm6uJwnpbc7qzLXjAZuz_k8QS1qB2Fghxs78e1ohHA_boz4xZx2MI1fSDW0eJZsb1_Z2Kw7W86mnzmjX_tg3fv0H",
+                    "isActive": true,
+                    "publicIdAvatarUrlCloudinary": null,
+                    "publicIdBackgroundUrlCloudinary": null,
+                    "dateLatestUpdate": 0,
+                    "dateCreate": 1705208014704,
+                    "dateUpdate": 1705222660782
+                  }
+                ]
+  /public/api/v1/posts:
+    get:
+      summary: get bài viết theo size, page, sort-by, topics
+      tags:
+        - Post
+      parameters:
+          - in: query
+            name: size
+            schema:
+              type: integer
+              default: 10
+              required: false
+          - in: query
+            name: page
+            schema:
+              type: integer
+              default: 1
+              required: false
+          - in: query
+            name: sort-by
+            schema:
+              type: string
+              enum:
+                - dateCreate
+                - trending
+                - topic
+              default: dateCreate
+              required: false
+          - in: query
+            name: topics
+            schema:
+              type: string
+              default: null
+              required: false
+      responses:
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 200
+                message: "Success"
+                payload: [
+                {
+                  "id": "5b96d40c-8a24-43a2-acbc-67ef7c7e9a0c",
+                  "idCreator": "34c5314a-917d-488a-9580-6ab2651c8d74",
+                  "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705222279/ngssomvlhvxizbkdeu7b.png",
+                  "description": "loremmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+                  "title": "<b>Tieu de bai viet nayayyyyyyyyyyyyyyyyy&nbsp;</b>",
+                  "topics": "NextJS,FrontEnd ,BackEnd,FullStack,ReactJS",
+                  "publishDate": 1705222617574,
+                  "isPublic": false,
+                  "isPaid": false,
+                  "isActive": true,
+                  "upvote": 0,
+                  "downvote": 0,
+                  "dateCreate": 1705222369911,
+                  "dateUpdate": 1705222617575,
+                  "creator": {
+                    "id": "34c5314a-917d-488a-9580-6ab2651c8d74",
+                    "nickname": "Ha Huy Tri (FPL HCM_K17)",
+                    "authId": "trihhps24849@fpt.edu.vn",
+                    "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocI7zEj79PuhUcV4T9sx5gNyMmsOlIEeW2WoTpXTzcoc=s96-c",
+                    "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocI7zEj79PuhUcV4T9sx5gNyMmsOlIEeW2WoTpXTzcoc=s96-c",
+                    "isAdmin": false,
+                    "clientToken": "cBJgKkFaQxaDG2sRTDrwU1:APA91bEFLvYo_j1Nnz-feL8lEDOCWJxHRUM7Y2DIHXEKqrbUS1Hzjm6uJwnpbc7qzLXjAZuz_k8QS1qB2Fghxs78e1ohHA_boz4xZx2MI1fSDW0eJZsb1_Z2Kw7W86mnzmjX_tg3fv0H",
+                    "isActive": true,
+                    "publicIdAvatarUrlCloudinary": null,
+                    "publicIdBackgroundUrlCloudinary": null,
+                    "dateLatestUpdate": 0,
+                    "dateCreate": 1705208014704,
+                    "dateUpdate": 1705222660782
+                  }
+                },
+              {
+                "id": "68452cab-cbd4-4fb9-9f67-2b4cfc33505e",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705210650/hbfhdno1hrzedsxqf7j8.webp",
+                "description": "Ngôn ngữ lập trình Go đã ngày càng trở nên phổ biến trong cộng đồng phần mềm và là một lựa chọn",
+                "title": "Cách Tối Ưu Hóa Hiệu Suất trong Golang tốt nhất trong công việc",
+                "topics": "BackEnd,FrontEnd ,FullStack,Công nghệ",
+                "publishDate": 1705210717894,
+                "isPublic": false,
+                "isPaid": false,
+                "isActive": true,
+                "upvote": 2,
+                "downvote": -1,
+                "dateCreate": 1705210700722,
+                "dateUpdate": 1705223140577,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              },
+              {
+                "id": "4678a74a-da37-4127-9e0d-69523d33133e",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705210357/fbk4ikpougwxrtzsogeg.jpg",
+                "description": "Có rất nhiều cách để tạo reactjs app, nhưng cách nhanh nhất và tốt nhất là Create React App ",
+                "title": "Dễ dàng làm việc với bất đồng bộ trong JavaScript: Hướng dẫn và các ví dụ thực tế",
+                "topics": "FrontEnd ,BackEnd,FullStack,ReactJS",
+                "publishDate": 1705210389749,
+                "isPublic": false,
+                "isPaid": false,
+                "isActive": true,
+                "upvote": 0,
+                "downvote": 0,
+                "dateCreate": 1705210371128,
+                "dateUpdate": 1705211363898,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              },
+              {
+                "id": "320c781f-3503-4940-9369-ea1ba28e9857",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705209693/syvhntd3o9wplblmmw13.png",
+                "description": "Nay em sẽ hướng dẫn các bác tự làm 1 slider cơ bản với html, css, js (nhìn chung các bác chỉ cần 1",
+                "title": "[HTML] Tự làm 1 slider đơn giản để ảnh người yêu hoặc quảng bá sản phẩm",
+                "topics": "FrontEnd ,Công nghệ",
+                "publishDate": 1705209794984,
+                "isPublic": false,
+                "isPaid": false,
+                "isActive": true,
+                "upvote": 0,
+                "downvote": 0,
+                "dateCreate": 1705209762376,
+                "dateUpdate": 1705213716730,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              },
+              {
+                "id": "015a3a39-9ec1-40b1-a7ba-cfc8e48545ad",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705179871/gd9z6m1olpcrebqidykv.png",
+                "description": "Trong công ty, có một bạn nhân viên có nickname là “Hoang Long” nhưng một ngày bạn muốn thay đổi...",
+                "title": "C#: Tối ưu code với kiểu truyền tham chiếu \"ref\" và \"out\" (Phần 1)",
+                "topics": "FrontEnd ,BackEnd,FullStack,NodeJS,Công nghệ",
+                "publishDate": 1705180139090,
+                "isPublic": false,
+                "isPaid": true,
+                "isActive": true,
+                "upvote": 0,
+                "downvote": 0,
+                "dateCreate": 1705180104342,
+                "dateUpdate": 1705180139091,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              },
+              {
+                "id": "5a9484a7-ec1c-4c7f-92c7-f78f3105085a",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705179118/rrrzeszyl6dgt9s47yde.png",
+                "description": "Có rất nhiều cách để tạo reactjs app, nhưng cách nhanh nhất và tốt nhất là Create React App ",
+                "title": "Làm sao để bắt đầu thuận lợi  với ReactJs (Phần 1)",
+                "topics": "FrontEnd ",
+                "publishDate": 1705179277471,
+                "isPublic": false,
+                "isPaid": true,
+                "isActive": true,
+                "upvote": 0,
+                "downvote": 0,
+                "dateCreate": 1705179214904,
+                "dateUpdate": 1705212684861,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              },
+              {
+                "id": "8e9ee7d6-8833-4a88-9392-7fbacc199b03",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705169848/gviw3dtpmgrbj4qfjj5m.webp",
+                "description": "Đây là chiếc laptop mình đã dùng trong nửa năm vừa qua, mẫu thiết bị khiến mình bỏ Apple iPad Pro",
+                "title": "java code",
+                "topics": "Công nghệ",
+                "publishDate": 1705170160071,
+                "isPublic": false,
+                "isPaid": false,
+                "isActive": true,
+                "upvote": 0,
+                "downvote": 0,
+                "dateCreate": 1705170137397,
+                "dateUpdate": 1705212808124,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              },
+              {
+                "id": "5e24f42e-7b0c-474e-87a1-67b59e04b9a9",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705169630/khhqjc9vtsy3mnwfu6vv.jpg",
+                "description": "Đây là một ứng dụng giúp bạn xem phim có đuôi FLV tải trên you tube hoặc trên nh ững trang web khác.",
+                "title": "ỨNG DỤNG SIB ( A simple MPlayer front end ) QUÁ TUYỆT",
+                "topics": "FrontEnd ",
+                "publishDate": 1705169641649,
+                "isPublic": false,
+                "isPaid": false,
+                "isActive": true,
+                "upvote": 0,
+                "downvote": 0,
+                "dateCreate": 1705169633519,
+                "dateUpdate": 1705212798238,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              },
+              {
+                "id": "5e0c1a6e-bf23-4611-a4bd-9c963207ed8e",
+                "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705169000/br1v61ug22fffdg3klku.jpg",
+                "description": "Được giới thiệu tại CES 2024, MEG 321URX QD-OLED là một chiếc màn hình chơi game rất đặc ",
+                "title": "CES24: Dạo quanh gian hàng của Hisense, từ TV cao cấp đến máy chiếu 8K, cùng nhiều công nghệ khác",
+                "topics": "FrontEnd ",
+                "publishDate": 1705169147706,
+                "isPublic": false,
+                "isPaid": true,
+                "isActive": true,
+                "upvote": 0,
+                "downvote": 0,
+                "dateCreate": 1705169117395,
+                "dateUpdate": 1705169147707,
+                "creator": {
+                  "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                  "nickname": "Nguyen Minh Tri",
+                  "authId": "nguyenminhtri1808t@gmail.com",
+                  "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                  "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                  "isAdmin": true,
+                  "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                  "isActive": false,
+                  "publicIdAvatarUrlCloudinary": null,
+                  "publicIdBackgroundUrlCloudinary": null,
+                  "dateLatestUpdate": null,
+                  "dateCreate": 1704967493369,
+                  "dateUpdate": 1705376464560
+                }
+              }
+              ]
+        500:
+          description: truyền sai kiểu sort-by
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 500
+                message: "fail"
+                payload: "Sort By Value Must Be Appropriate Enum (dateCrate)::${sort-by}"
+  /public/api/v1/accounts/{id}/posts:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id account cần tìm
+          schema:
+            title: id
+            type: string
+      tags:
+        - Account
+      description: Lấy ra thông tin của account theo id và danh sách bài post của họ.
+      responses:
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 200
+                message: "Success"
+                payload: [
+                  {
+                    "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                    "nickname": "Nguyen Minh Tri",
+                    "authId": "nguyenminhtri1808t@gmail.com",
+                    "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                    "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                    "isAdmin": true,
+                    "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                    "isActive": false,
+                    "publicIdAvatarUrlCloudinary": null,
+                    "publicIdBackgroundUrlCloudinary": null,
+                    "dateLatestUpdate": null,
+                    "dateCreate": 1704967493369,
+                    "dateUpdate": 1705376464560,
+                    "posts": [
+                      {
+                        "id": "5e24f42e-7b0c-474e-87a1-67b59e04b9a9",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705169630/khhqjc9vtsy3mnwfu6vv.jpg",
+                        "description": "Đây là một ứng dụng giúp bạn xem phim có đuôi FLV tải trên you tube hoặc trên nh ững trang web khác.",
+                        "title": "ỨNG DỤNG SIB ( A simple MPlayer front end ) QUÁ TUYỆT",
+                        "topics": "FrontEnd ",
+                        "publishDate": 1705169641649,
+                        "isPublic": false,
+                        "isPaid": false,
+                        "isActive": true,
+                        "upvote": 0,
+                        "downvote": 0,
+                        "dateCreate": 1705169633519,
+                        "dateUpdate": 1705212798238
+                      },
+                      {
+                        "id": "320c781f-3503-4940-9369-ea1ba28e9857",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705209693/syvhntd3o9wplblmmw13.png",
+                        "description": "Nay em sẽ hướng dẫn các bác tự làm 1 slider cơ bản với html, css, js (nhìn chung các bác chỉ cần 1",
+                        "title": "[HTML] Tự làm 1 slider đơn giản để ảnh người yêu hoặc quảng bá sản phẩm",
+                        "topics": "FrontEnd ,Công nghệ",
+                        "publishDate": 1705209794984,
+                        "isPublic": false,
+                        "isPaid": false,
+                        "isActive": true,
+                        "upvote": 0,
+                        "downvote": 0,
+                        "dateCreate": 1705209762376,
+                        "dateUpdate": 1705213716730
+                      },
+                      {
+                        "id": "5a9484a7-ec1c-4c7f-92c7-f78f3105085a",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705179118/rrrzeszyl6dgt9s47yde.png",
+                        "description": "Có rất nhiều cách để tạo reactjs app, nhưng cách nhanh nhất và tốt nhất là Create React App ",
+                        "title": "Làm sao để bắt đầu thuận lợi  với ReactJs (Phần 1)",
+                        "topics": "FrontEnd ",
+                        "publishDate": 1705179277471,
+                        "isPublic": false,
+                        "isPaid": true,
+                        "isActive": true,
+                        "upvote": 0,
+                        "downvote": 0,
+                        "dateCreate": 1705179214904,
+                        "dateUpdate": 1705212684861
+                      },
+                      {
+                        "id": "5e0c1a6e-bf23-4611-a4bd-9c963207ed8e",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705169000/br1v61ug22fffdg3klku.jpg",
+                        "description": "Được giới thiệu tại CES 2024, MEG 321URX QD-OLED là một chiếc màn hình chơi game rất đặc ",
+                        "title": "CES24: Dạo quanh gian hàng của Hisense, từ TV cao cấp đến máy chiếu 8K, cùng nhiều công nghệ khác",
+                        "topics": "FrontEnd ",
+                        "publishDate": 1705169147706,
+                        "isPublic": false,
+                        "isPaid": true,
+                        "isActive": true,
+                        "upvote": 0,
+                        "downvote": 0,
+                        "dateCreate": 1705169117395,
+                        "dateUpdate": 1705169147707
+                      },
+                      {
+                        "id": "015a3a39-9ec1-40b1-a7ba-cfc8e48545ad",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705179871/gd9z6m1olpcrebqidykv.png",
+                        "description": "Trong công ty, có một bạn nhân viên có nickname là “Hoang Long” nhưng một ngày bạn muốn thay đổi...",
+                        "title": "C#: Tối ưu code với kiểu truyền tham chiếu \"ref\" và \"out\" (Phần 1)",
+                        "topics": "FrontEnd ,BackEnd,FullStack,NodeJS,Công nghệ",
+                        "publishDate": 1705180139090,
+                        "isPublic": false,
+                        "isPaid": true,
+                        "isActive": true,
+                        "upvote": 0,
+                        "downvote": 0,
+                        "dateCreate": 1705180104342,
+                        "dateUpdate": 1705180139091
+                      },
+                      {
+                        "id": "8e9ee7d6-8833-4a88-9392-7fbacc199b03",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705169848/gviw3dtpmgrbj4qfjj5m.webp",
+                        "description": "Đây là chiếc laptop mình đã dùng trong nửa năm vừa qua, mẫu thiết bị khiến mình bỏ Apple iPad Pro",
+                        "title": "java code",
+                        "topics": "Công nghệ",
+                        "publishDate": 1705170160071,
+                        "isPublic": false,
+                        "isPaid": false,
+                        "isActive": true,
+                        "upvote": 0,
+                        "downvote": 0,
+                        "dateCreate": 1705170137397,
+                        "dateUpdate": 1705212808124
+                      },
+                      {
+                        "id": "4678a74a-da37-4127-9e0d-69523d33133e",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705210357/fbk4ikpougwxrtzsogeg.jpg",
+                        "description": "Có rất nhiều cách để tạo reactjs app, nhưng cách nhanh nhất và tốt nhất là Create React App ",
+                        "title": "Dễ dàng làm việc với bất đồng bộ trong JavaScript: Hướng dẫn và các ví dụ thực tế",
+                        "topics": "FrontEnd ,BackEnd,FullStack,ReactJS",
+                        "publishDate": 1705210389749,
+                        "isPublic": false,
+                        "isPaid": false,
+                        "isActive": true,
+                        "upvote": 0,
+                        "downvote": 0,
+                        "dateCreate": 1705210371128,
+                        "dateUpdate": 1705211363898
+                      },
+                      {
+                        "id": "68452cab-cbd4-4fb9-9f67-2b4cfc33505e",
+                        "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                        "backgroundUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705210650/hbfhdno1hrzedsxqf7j8.webp",
+                        "description": "Ngôn ngữ lập trình Go đã ngày càng trở nên phổ biến trong cộng đồng phần mềm và là một lựa chọn",
+                        "title": "Cách Tối Ưu Hóa Hiệu Suất trong Golang tốt nhất trong công việc",
+                        "topics": "BackEnd,FrontEnd ,FullStack,Công nghệ",
+                        "publishDate": 1705210717894,
+                        "isPublic": false,
+                        "isPaid": false,
+                        "isActive": true,
+                        "upvote": 2,
+                        "downvote": -1,
+                        "dateCreate": 1705210700722,
+                        "dateUpdate": 1705223140577
+                      }
+                    ]
+                  }
+                ]
+        404:
+          description: không tìm thấy account/ id bằng null
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 404
+                message: "fail"
+                payload: "Not Found The Account With Id::${id}"
+  /public/api/v1/accounts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: id account cần tìm
+        schema:
+          title: id
+          type: string
+    get:
+      tags:
+        - Account
+      description: Lấy ra thông tin của account theo id.
+      responses:
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 200
+                message: "Success"
+                payload: [
+                  {
+                    "id": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                    "nickname": "Nguyen Minh Tri",
+                    "authId": "nguyenminhtri1808t@gmail.com",
+                    "avatarUrl": "https://res.cloudinary.com/dbxc9n6e4/image/upload/v1705204404/ot7iw0fmzdvteuqcv2ar.jpg",
+                    "backgroundUrl": "https://lh3.googleusercontent.com/a/ACg8ocK_TgdSKQA9UYf0lE6Jok5isi0CJmInSPsS9rNbPanL=s96-c",
+                    "isAdmin": true,
+                    "clientToken": "eZq2bhGSgTgdyHbg2NgRfp:APA91bHw4ILyz1IuM7KC903V4ZrJmOGUzSBu2fZpcJXgmyfXB0BWjAzJ-0sXMb2UJoQrplSckzXGWOLhfkPtcFfZhTjlkq8HMpWk_E5lIqQOTVQNoI2_LfKVqyySXIOlL734chh_YsLQ",
+                    "isActive": false,
+                    "publicIdAvatarUrlCloudinary": null,
+                    "publicIdBackgroundUrlCloudinary": null,
+                    "dateLatestUpdate": null,
+                    "dateCreate": 1704967493369,
+                    "dateUpdate": 1705376464560
+                  }
+                ]
+        404:
+          description: không tìm thấy account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 404
+                message: "fail"
+                payload: "Not Found The Account With Id::"
+  /public/api/v1/comments:
+    get:
+      tags:
+        - AccountPostComment
+      parameters:
+        - in: query
+          name: postId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: parentCommentId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: size
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: sort-by
+          required: false
+          schema:
+            type: string
+            default: dateCreate
+      responses:
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                statusCode: 200
+                message: "Success"
+                payload: [
+                  {
+                    "id": "31124888-7f51-4e52-a2d3-8d598ff21934",
+                    "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                    "idPost": "5b96d40c-8a24-43a2-acbc-67ef7c7e9a0c",
+                    "idParentComment": null,
+                    "content": "Bai",
+                    "dateCreate": 1705324004960,
+                    "dateUpdate": 1705324004960,
+                    "creator": {}
+                  },
+                  {
+                    "id": "3b274b8c-0d1b-47fd-94a4-0fbe6af2bf08",
+                    "idCreator": "663bc75b-bad9-498a-b5c0-53029c3271be",
+                    "idPost": "5b96d40c-8a24-43a2-acbc-67ef7c7e9a0c",
+                    "idParentComment": null,
+                    "content": "asdfasdf",
+                    "dateCreate": 1705324010502,
+                    "dateUpdate": 1705324010502,
+                    "creator": {}
+                  }
+                ]
+        404:
+          description: không tìm thấy bài post/ parent comment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 404
+                message: "fail"
+                payload: "Recheck Again, Post Comment Id Must Be Not Null Or Empty!!"
+  /api/v1/comments:
+    post:
+      tags:
+        - AccountPostComment
+      parameters:
+        - in: cookie
+          name: token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                postId:
+                  type: string
+                  required: true
+                content:
+                  type: string
+                  required: true
+                parentIdComment:
+                  type: string
+                  required: false
+      responses:
+        500:
+          description: Lỗi requestBody chưa truyền đúng giá trị đầu vào
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 500
+                message: "fail"
+                payload: "Recheck Again, AccountPostCommentDto Properties in Request Body Must Be Appropriate!!"
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 500
+                message: "Success"
+                payload: []
+    put:
+      tags:
+        - AccountPostComment
+      parameters:
+        - in: cookie
+          name: token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountPostCommentId:
+                  type: string
+                content:
+                  type: string
+      responses:
+        200:
+          description: thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Result"
+              example:
+                status: 200
+                message: "Success"
+                payload: []

@@ -1,0 +1,26 @@
+components:
+  schemas:
+    Result:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        payload:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+#          items:
+#            oneOf:
+#              - $ref: "./Account.yml#/components/schemas/Account"
+#              - $ref: "./AccountPostComment.yml#/components/schemas/AccountPostComment"
+#              - $ref: "./AccountPostReaction.yml#/components/schemas/AccountPostReaction"
+#              - $ref: "./AccountPublication.yml#/components/schemas/AccountPublication"
+#              - $ref: "./AccountPublicationPost.yml#/components/schemas/AccountPublicationPost"
+#              - $ref: "./Notification.yml#/components/schemas/Notification"
+#              - $ref: "./Post.yml#/components/schemas/Post"
+#              - $ref: "./Publication.yml#/components/schemas/Publication"
+#              - type: String

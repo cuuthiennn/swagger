@@ -1,0 +1,29 @@
+components:
+  schemas:
+    AccountPublicationPost:
+      type: object
+      properties:
+        idAccount:
+          type: String
+          description: Id của Account
+        idPublication:
+          type: String
+          description: Id của Publication
+        idPost:
+          type: String
+          description: Id của bài Post
+        isVote:
+          type: Boolean
+          description: True là up vote, false là down vote
+        isShare:
+          type: Boolean
+          description: True là đã share bài viết và ngược lại
+        isSave:
+          type: Boolean
+          description: True là đã lưu bài viết và ngược lại
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo, kiểu dữ liệu là date được chuyển thành BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật, kiểu dữ liệu là date được chuyển thành BigInteger

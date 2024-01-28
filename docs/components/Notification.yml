@@ -1,0 +1,29 @@
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        id:
+          type: String
+          description: Id của notification
+        idConsumer:
+          type: String
+          description: Id của account
+        title:
+          type: String
+          description: Tiêu đề của thông báo
+        topic:
+          type: String
+          description: Chủ đề của thông báo
+        message:
+          type: String
+          description: Tin nhắn của thông báo
+        isSeen:
+          type: Boolean
+          description: True là đã đọc và ngược lại
+        dateCreate:
+          type: Integer
+          description: Ngày khởi tạo - date được chuyển thành BigInteger
+        dateUpdate:
+          type: Integer
+          description: Ngày cập nhật - date được chuyển thành BigInteger
